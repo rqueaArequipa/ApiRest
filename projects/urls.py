@@ -5,6 +5,7 @@ router = routers.DefaultRouter()
 
 router.register('api/projects', ProjectViewSet)
 router.register('api/Users' ,UsersViewSet)
+#router.register('op-filter', views.op_listView, basename='op-filter')
 
 #==================== WEB PAGINE ==============#
 router.register('api/distritos' ,DistritosViewSet , 'distritos' )
