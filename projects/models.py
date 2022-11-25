@@ -19,7 +19,7 @@ class Users(models.Model):
 #clases de PAGINA WEB
 class Distritos(models.Model):
     nombre = models.CharField(max_length=100 , unique=True)
-    imagen = models.ImageField(upload_to = "distritos" , null =True)
+    imagen = models.CharField(max_length=200)
 
     def _str_(self):
         return self.nombre
