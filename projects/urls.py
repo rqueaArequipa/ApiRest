@@ -1,9 +1,8 @@
 from rest_framework import routers
-from .api import ProjectViewSet, UsersViewSet, DistritosViewSet , ParaderosViewSet ,JornadasViewSet,RutasViewSet, UsuariosViewSet,EmpresasViewSet , UnidadesViewSet
+from .api import UsersViewSet, DistritosViewSet , ParaderosViewSet ,JornadasViewSet,RutasViewSet, UsuariosViewSet,EmpresasViewSet , UnidadesViewSet
 
 router = routers.DefaultRouter()
 
-router.register('api/projects', ProjectViewSet)
 router.register('api/Users' ,UsersViewSet)
 #router.register('op-filter', views.op_listView, basename='op-filter')
 

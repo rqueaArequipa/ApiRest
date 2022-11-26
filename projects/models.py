@@ -1,25 +1,23 @@
 from django.db import models
 
 # Create your models here.
-class Project(models.Model):
-    title = models.CharField(max_length=200)
-    description = models.TextField()
-    technology = models.CharField(max_length=200)
-    created_at = models.DateTimeField(auto_now_add=True)
 
 class Users(models.Model):
     name = models.CharField(max_length=200)
     lastname = models.CharField(max_length=200)
     email = models.EmailField()
     rol = models.IntegerField(default=1)
-    password = models.CharField(max_length=8)
+    password = models.CharField(max_length=20 )
     created_at = models.DateTimeField(auto_now_add=True)
+
+    def _str_(self):
+        return self.name
 
 
 #clases de PAGINA WEB
 class Distritos(models.Model):
     nombre = models.CharField(max_length=100 , unique=True)
-    imagen = models.CharField(max_length=200, null=True)
+    imagen = models.CharField(max_length=250, null=True)
 
     def _str_(self):
         return self.nombre
@@ -29,7 +27,7 @@ class Distritos(models.Model):
 class Paraderos(models.Model):
     ubicacion = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=200)
-    imagen = models.ImageField(upload_to = "paraderos" , null =True)  
+    imagen = models.CharField(max_length=250, null=True)  
     
     def _str_(self):
         return self.ubicacion  
@@ -71,7 +69,7 @@ class Empresas(models.Model):
     nombre = models.CharField(max_length=200)
     cantidad = models.IntegerField()
     distrito_id = models.ForeignKey(Distritos , on_delete=models.CASCADE)
-    imagen = models.ImageField(upload_to = "empresas" , null =True)  
+    imagen = models.CharField(max_length=250, null=True) 
     rutas_id = models.ForeignKey(Rutas , on_delete=models.CASCADE)
     
     def _str_(self):
