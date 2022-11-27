@@ -1,6 +1,5 @@
-#!/usr/bin/env bash
-# exit on error
-set -o errexit
+venv
+db.sqlite3
 
 pip install -r requirements.txt
 

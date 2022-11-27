@@ -1,20 +1,23 @@
 from .models import Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
 from rest_framework import viewsets, permissions, filters
-from .serializers import UsersSerializer, DistritosSerializer , ParaderosSerializer , JornadasSerializer , RutasSerializer , UnidadesSerializer,EmpresasSerializer,UsuariosSerializer
+from .serializers import  UsersSerializer,DistritosSerializer , ParaderosSerializer , JornadasSerializer , RutasSerializer , UnidadesSerializer,EmpresasSerializer,UsuariosSerializer
 from rest_framework.permissions import IsAuthenticated
 #import django_filters.rest_framework import DjangoFilterBackend
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import generics
+from django.http import JsonResponse, HttpResponse
+from django.views import View
+
+
 
 
 class UsersViewSet(viewsets.ModelViewSet):
     queryset = Users.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = UsersSerializer
     filter_backends =[DjangoFilterBackend, filters.SearchFilter]
     filterset_fields = ['id' , 'name' , 'lastname' , 'email' , 'rol', 'password']
     search_fields = ['id' , 'name' , 'lastname' , 'email' , 'rol', 'password']
-    #filter_backends = []
     #filter_backends =[filters.OrderingFilter]
     #filter_fields = ["id" , "name" , "lastname" , "email" , "rol", "password"]
     #filter_fields = ["id" , "name" , "lastname" , "email" , "rol", "password"]
@@ -25,7 +28,7 @@ class DistritosViewSet(viewsets.ModelViewSet):
     
     
     queryset = Distritos.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = DistritosSerializer
     
     #Filtros
@@ -37,7 +40,7 @@ class DistritosViewSet(viewsets.ModelViewSet):
     
 class ParaderosViewSet(viewsets.ModelViewSet):
     queryset = Paraderos.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = ParaderosSerializer   
 
     #Filtros
@@ -48,7 +51,7 @@ class ParaderosViewSet(viewsets.ModelViewSet):
     
 class JornadasViewSet(viewsets.ModelViewSet):
     queryset = Jornadas.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = JornadasSerializer
 
     #Filtros
@@ -59,7 +62,7 @@ class JornadasViewSet(viewsets.ModelViewSet):
     
 class RutasViewSet(viewsets.ModelViewSet):
     queryset = Rutas.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = RutasSerializer
 
     #Filtros
@@ -71,7 +74,7 @@ class RutasViewSet(viewsets.ModelViewSet):
 class UsuariosViewSet(viewsets.ModelViewSet):
     
     queryset = Usuarios.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = UsuariosSerializer
 
     #Filtros
@@ -82,7 +85,7 @@ class UsuariosViewSet(viewsets.ModelViewSet):
     
 class EmpresasViewSet(viewsets.ModelViewSet):
     queryset = Empresas.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = EmpresasSerializer
 
     #Filtros
@@ -93,7 +96,7 @@ class EmpresasViewSet(viewsets.ModelViewSet):
     
 class UnidadesViewSet(viewsets.ModelViewSet):
     queryset = Unidades.objects.all()
-    permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.DjangoModelPermissionsOrAnonReadOnly]
     serializer_class = UnidadesSerializer
 
     #Filtros
