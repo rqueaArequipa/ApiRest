@@ -51,7 +51,8 @@ class Rutas(models.Model):
     inicio = models.CharField(max_length=200)
     final = models.CharField(max_length=200)
     descripcion = models.CharField(max_length=200)
-    paraderos_id = models.ForeignKey(Paraderos, on_delete=models.CASCADE)
+    paraderos_id = models.ForeignKey(Paraderos, null=True, blank=True, on_delete=models.CASCADE)
+    distrito_id = models.ForeignKey(Distritos, on_delete=models.CASCADE)
     
     def _str_(self):
         return self.nombre
@@ -60,7 +61,7 @@ class Usuarios(models.Model):
     nombre = models.CharField(max_length=200)
     email = models.CharField(max_length=200)
     password= models.CharField(max_length=200)
-    distritos_id = models.ForeignKey(Distritos , on_delete=models.CASCADE)
+    distrito_id = models.ForeignKey(Distritos , on_delete=models.CASCADE)
     
     def _str_(self):
         return self.nombre    
@@ -91,7 +92,7 @@ class Unidades(models.Model):
     def _str_(self):
         return self.placa
 
-class Rutas2(models.Model):
+''''class Rutas2(models.Model):
     nombre = models.CharField(max_length=200)
     inicio = models.CharField(max_length=200)
     final = models.CharField(max_length=200)
@@ -100,7 +101,7 @@ class Rutas2(models.Model):
     distritos_id = models.ForeignKey(Distritos, on_delete=models.CASCADE)
     
     def __str__(self):
-        return self.nombre
+        return self.nombre'''
 
 
     

@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Rutas2, Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
+from .models import Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
@@ -27,14 +27,13 @@ class JornadasSerializer(serializers.ModelSerializer):
 class RutasSerializer(serializers.ModelSerializer):
     class Meta:
         model = Rutas
-        fields = ("id" , "nombre" ,"inicio" , "final" , "descripcion" , "paraderos_id" )      
+        fields = ("id" , "nombre" ,"inicio" , "final" , "descripcion" , "paraderos_id", 'distrito_id' )      
         
         
 class UsuariosSerializer(serializers.ModelSerializer):
-    #distritos_id =serializers.CharField(source = 'distritos_id.nombre')
     class Meta:
         model = Usuarios
-        fields = ("id" , "nombre" , "email" , "password" , "distritos_id")                   
+        fields = ("id" , "nombre" , "email" , "password" , "distrito_id")                   
         
 class EmpresasSerializer(serializers.ModelSerializer):
     class Meta:
@@ -49,10 +48,10 @@ class UnidadesSerializer(serializers.ModelSerializer):
                   "distrito_id" , "rutas_id" , "jornadas_id")
 
 
-class Rutas2Serializer(serializers.ModelSerializer):
+'''class Rutas2Serializer(serializers.ModelSerializer):
     class Meta:
         model = Rutas2
-        fields = ("id" , "nombre" ,"inicio" , "final" , "descripcion" , "paraderos_id" , "distritos_id") 
+        fields = ("id" , "nombre" ,"inicio" , "final" , "descripcion" , "paraderos_id" , "distritos_id") '''
 
 
     

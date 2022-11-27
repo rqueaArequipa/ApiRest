@@ -1,5 +1,5 @@
 from rest_framework import routers
-from .api import Rutas2ViewSet, UsersViewSet, DistritosViewSet , ParaderosViewSet ,JornadasViewSet,RutasViewSet, UsuariosViewSet,EmpresasViewSet , UnidadesViewSet
+from .api import UsersViewSet, DistritosViewSet , ParaderosViewSet ,JornadasViewSet,RutasViewSet, UsuariosViewSet,EmpresasViewSet , UnidadesViewSet
 
 router = routers.DefaultRouter()
 
@@ -14,6 +14,6 @@ router.register('api/rutas' ,RutasViewSet , 'rutas' )
 router.register('api/usuarios' ,UsuariosViewSet , 'usuarios' )
 router.register('api/empresas' ,EmpresasViewSet , 'empresas' )
 router.register('api/unidades' ,UnidadesViewSet , 'unidades')
-router.register('api/rutas2' ,Rutas2ViewSet , 'rutas2' )
+#router.register('api/rutas2' ,Rutas2ViewSet , 'rutas2' )
 
 urlpatterns = router.urls
