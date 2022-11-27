@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
+from .models import Rutas2, Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
@@ -47,6 +47,12 @@ class UnidadesSerializer(serializers.ModelSerializer):
         model = Unidades
         fields = ("id" , "conductor" , "placa" , "longitud" , "capacidad" ,"lapso_tiempo" , "empresas_id" ,
                   "distrito_id" , "rutas_id" , "jornadas_id")
+
+
+class Rutas2Serializer(serializers.ModelSerializer):
+    class Meta:
+        model = Rutas2
+        fields = ("id" , "nombre" ,"inicio" , "final" , "descripcion" , "paraderos_id" , "distritos_id") 
 
 
     

@@ -1,6 +1,6 @@
-from .models import Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
+from .models import Rutas2, Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
 from rest_framework import viewsets, permissions, filters
-from .serializers import  UsersSerializer, DistritosSerializer , ParaderosSerializer , JornadasSerializer , RutasSerializer , UnidadesSerializer,EmpresasSerializer,UsuariosSerializer
+from .serializers import  Rutas2Serializer, UsersSerializer, DistritosSerializer , ParaderosSerializer , JornadasSerializer , RutasSerializer , UnidadesSerializer,EmpresasSerializer,UsuariosSerializer
 from rest_framework.permissions import IsAuthenticated
 #import django_filters.rest_framework import DjangoFilterBackend
 from django_filters.rest_framework import DjangoFilterBackend
@@ -101,5 +101,13 @@ class UnidadesViewSet(viewsets.ModelViewSet):
     filterset_fields = ['id' , 'conductor' , 'placa' , 'longitud' , 'capacidad', 'lapso_tiempo', 'empresas_id' , 'distrito_id' , 'rutas_id' , 'jornadas_id']
     search_fields = ['id' , 'conductor' , 'placa' , 'longitud' , 'capacidad', 'lapso_tiempo', 'empresas_id' , 'distrito_id' , 'rutas_id' , 'jornadas_id']
 
+class Rutas2ViewSet(viewsets.ModelViewSet):
+    queryset = Rutas2.objects.all()
+    permission_classes = [permissions.AllowAny]
+    serializer_class = Rutas2Serializer  
+     #Filtros
+    filter_backends =[DjangoFilterBackend, filters.SearchFilter]
+    filterset_fields = ['id' , 'nombre' , 'inicio' , 'final' , 'descripcion', 'paraderos_id', 'distritos_id']
+    search_fields = ['id' , 'nombre' , 'inicio' , 'final' , 'descripcion', 'paraderos_id', 'distritos_id']
 
     

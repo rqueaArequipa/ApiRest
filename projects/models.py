@@ -91,6 +91,17 @@ class Unidades(models.Model):
     def _str_(self):
         return self.placa
 
+class Rutas2(models.Model):
+    nombre = models.CharField(max_length=200)
+    inicio = models.CharField(max_length=200)
+    final = models.CharField(max_length=200)
+    descripcion = models.CharField(max_length=500)
+    paraderos_id = models.ForeignKey(Paraderos, on_delete=models.CASCADE)
+    distritos_id = models.ForeignKey(Distritos, on_delete=models.CASCADE)
+    
+    def __str__(self):
+        return self.nombre
+
 
     
 
