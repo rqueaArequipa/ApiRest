@@ -1,5 +1,14 @@
 from rest_framework import serializers
-from .models import Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades
+from .models import Users, Distritos , Paraderos ,Jornadas ,Rutas , Usuarios ,Empresas ,Unidades, Comentarios
+
+from django.contrib.auth.models import User
+
+class UsuarioSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        moel = User
+        fields = ('id', 'username', 'password','is_staff')
+        extra_kwargs = {'password': {'write_only':True}}
 
 class UsersSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,6 +53,11 @@ class EmpresasSerializer(serializers.ModelSerializer):
 class UnidadesSerializer(serializers.ModelSerializer):
     class Meta:
         model = Unidades
+        fields = fields = ("__all__")
+
+class ComentarioSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Comentarios
         fields = fields = ("__all__")
 
 

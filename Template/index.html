@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /*Esto es solo para codepen*/
+        @import url(https://fonts.googleapis.com/css?family=Frauces);
+        @import url(https://fonts.googleapis.com/css?family=Bitter);
+
+        /*Las fuentes originales son estas*/
+        @font-face {
+            font-family: "Frauces";
+            src: url(../fonts/Frauces.ttf);
+        }
+
+        @font-face {
+            font-family: "Roboto-Regular";
+            src: url(../fonts/Roboto-Regular.ttf);
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 20px;
+            font-family: "Roboto";
+        }
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: "Bitter";
+        }
+
+        img {
+            display: block;
+            max-width: 100%;
+        }
+
+        p {
+            line-height: 25px;
+        }
+
+        .container--flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        /*Estilos del header*/
+        .main-header {
+            padding: 0 15px;
+        }
+
+        .main-title {
+            color: rgb(10, 152, 218);
+        }
+
+        .color-span {
+            color: #000000;
+        }
+
+        /*Estilos del menu*/
+        .icon-menu {
+            font-size: 1.5em;
+            color: #EEAD33;
+            border: 1px solid white;
+            display: block;
+            padding: 5px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu {
+            position: absolute;
+            top: 80px;
+            left: 0;
+            background: #212121;
+            width: 100%;
+            list-style: none;
+            padding: 20px;
+            margin: 0;
+            z-index: 999;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.5s;
+        }
+
+        .menu__item {
+            padding: 20px;
+            text-align: center;
+            width: 150px;
+            margin: auto;
+        }
+
+        .menu__link {
+            color: white;
+            text-decoration: none;
+            position: relative;
+            display: block;
+        }
+
+        .menu__link:before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-right: 2px solid #EEAD33;
+            border-top: 2px solid #EEAD33;
+            top: 0;
+            right: 0;
+            opacity: 0;
+        }
+
+        .menu__link:after {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-left: 2px solid #EEAD33;
+            border-bottom: 2px solid #EEAD33;
+            left: 0;
+            bottom: 0;
+            opacity: 0;
+        }
+
+        .menu__link span:before {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-left: 2px solid #EEAD33;
+            border-top: 2px solid #EEAD33;
+            top: 0;
+            left: 0;
+            opacity: 0;
+        }
+
+        .menu__link span:after {
+            content: "";
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            border-bottom: 2px solid #EEAD33;
+            border-right: 2px solid #EEAD33;
+            bottom: 0;
+            right: 0;
+            opacity: 0;
+        }
+
+        .menu__link span {
+            padding: 10px;
+            font-size: 1.1em;
+            display: block;
+        }
+
+        .menu__link--select:before,
+        .menu__link--select:after,
+        .menu__link--select span:before,
+        .menu__link--select span:after {
+            opacity: 1;
+        }
+
+        .menu__item:hover .menu__link:before,
+        .menu__item:hover .menu__link:after,
+        .menu__item:hover .menu__link span:before,
+        .menu__item:hover .menu__link span:after {
+            opacity: 1;
+        }
+
+        .nav-social {
+            display: flex;
+            align-items: flex-start;
+        }
+
+        .nav-social__item {
+            width: 35px;
+            height: 35px;
+            display: block;
+            text-align: center;
+            padding: 10px;
+        }
+
+        .nav-social__item:first-child {
+            background: #3b5998;
+        }
+
+        .nav-social__item:nth-child(2) {
+            background: #1da1f2;
+        }
+
+        .nav-social__item:nth-child(3) {
+            background: #ea4c89;
+        }
+
+        .nav-social__item i {
+            color: white;
+        }
+
+        .mostrar {
+            opacity: 1;
+            visibility: visible;
+        }
+
+
+        /*Estilos del banner*/
+        .banner {
+            background: url(https://crystal.cafe/b/src/1627352014624.jpg);
+            min-height: 400px;
+            position: absolute;
+            background-size: 100%;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: -999;
+
+        }
+
+        .banner:before {
+            content: "";
+            width: 100%;
+            min-height: 400px;
+            background: rgba(0, 0, 0, 0.3);
+            position: absolute;
+            top: 0;
+            left: 0;
+
+        }
+
+        .banner__content {
+            width: 100%;
+            padding: 15px;
+            position: absolute;
+            top: 60%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            color: white;
+            font-size: 1.3em;
+        }
+
+        /*Estilos de Main*/
+        .main {
+            margin-top: 350px;
+        }
+
+        .section__title {
+            font-size: 2em;
+            position: relative;
+            text-align: center;
+        }
+
+        .section__title:before {
+            content: "";
+            width: 200px;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 3px;
+            background: #EEAD33;
+        }
+
+        .welcome {
+            text-align: center;
+            padding: 20px;
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .welcome__txt {
+            font-size: 1.2em;
+            color: #777;
+        }
+
+        .welcome__btn {
+            display: block;
+            border: 2px solid #EEAD33;
+            width: 200px;
+            margin: auto;
+            padding: 10px;
+            text-decoration: none;
+            color: #EEAD33;
+            font-size: 1.2em;
+            font-weight: bold;
+            margin-top: 30px;
+            transition: all 0.5s;
+        }
+
+        .welcome__btn:hover {
+            background: #EEAD33;
+            color: white;
+        }
+
+        .container-design {
+            margin: 20px 0;
+        }
+
+        .design__item {
+            position: relative;
+        }
+
+        .design__item:before {
+            content: "";
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .design__title {
+            position: absolute;
+            top: 40%;
+            left: 50%;
+            transform: translateX(-50%) translateY(-50%);
+            color: white;
+            font-size: 1.8em;
+            width: 100%;
+            text-align: center;
+        }
+
+        .design__title:before {
+            content: "";
+            width: 200px;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 3px;
+            background: #EEAD33;
+        }
+
+        .design__title:after {
+            content: "";
+            width: 200px;
+            position: absolute;
+            bottom: -30px;
+            left: 50%;
+            transform: translateX(-50%);
+            height: 3px;
+            background: #EEAD33;
+        }
+
+        .container-testimonials {
+            margin: 60px auto;
+            max-width: 650px;
+        }
+
+        .testimonials__img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: auto;
+        }
+
+        .testimonials__txt {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .testimonials__name {
+            text-align: center;
+            font-size: 1.4em;
+            color: #EEAD33;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+
+        .box {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            margin: 30px 0;
+        }
+
+        .box__content {
+            width: 70%;
+        }
+
+        .box__icon {
+            width: 100px;
+            height: 100px;
+            border: 2px solid #999;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 2em;
+            color: #EEAD33;
+        }
+
+        .box__icon:hover {
+            color: black;
+        }
+
+        .box__title {
+            color: #EEAD33;
+            margin: 0;
+        }
+
+        .box__txt {
+            color: #999;
+        }
+
+        .newsletter {
+            margin: 50px 0;
+        }
+
+        .form {
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            max-width: 600px;
+        }
+
+        .form__mail {
+            display: block;
+            background: #ddd;
+            padding: 15px;
+            width: 75%;
+            border: none;
+            font-size: 1em;
+        }
+
+        .form__submit {
+            display: block;
+            background: #EEAD33;
+            border: none;
+            padding: 15px;
+            width: 20%;
+            color: white;
+            font-size: 1em;
+        }
+
+        .main-footer {
+            background: #282828;
+            color: #828282;
+        }
+
+        .main-footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        .footer__title {
+            font-size: 1.8em;
+            color: white;
+            text-transform: uppercase;
+        }
+
+        .column--50-25 {
+            width: 49%;
+            padding: 20px;
+        }
+
+        .footer__author {
+            text-align: right;
+            color: #EEAD33;
+            display: block;
+        }
+
+        .footer__txt .fa-twitter {
+            color: #3bbef5;
+            margin-right: 5px;
+        }
+
+        .footer__link {
+            color: #EEAD33;
+        }
+
+        .footer__date {
+            font-size: .8em;
+            border-bottom: 1px solid #888;
+            padding-bottom: 10px;
+            color: white;
+        }
+
+        .social-icon {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .social-icon i {
+            margin-right: 10px;
+            width: 35px;
+            height: 35px;
+            text-align: center;
+            color: white;
+            padding: 10px;
+            border-radius: 50%;
+
+        }
+
+        .social-icon .fa-facebook-f {
+            background: #3b5998;
+        }
+
+        .social-icon .fa-twitter {
+            background: #3bbef5;
+        }
+
+        .social-icon .fa-dribbble {
+            background: #f7659b;
+        }
+
+        .social-icon .fa-pinterest {
+            background: #e23139;
+        }
+
+        .social__link {
+            display: block;
+            text-decoration: none;
+            color: #828282;
+        }
+
+        .contact-icon {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-icon .fas {
+            color: white;
+            display: block;
+            margin-right: 10px;
+        }
+
+        .copy {
+            background: #211E1E;
+            padding: 20px;
+            color: white;
+            text-align: center;
+            width: 100%;
+        }
+
+        @media screen and (min-width: 768px) {
+            .menu {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                width: auto;
+                display: flex;
+                background: none;
+                font-size: .8em;
+            }
+
+            .menu__item {
+                width: auto;
+            }
+
+            .icon-menu {
+                display: none;
+            }
+
+            .banner {
+                min-height: 500px;
+            }
+
+            .banner:before {
+                min-height: 500px;
+            }
+
+            .main {
+                margin-top: 400px;
+            }
+
+            .box {
+                justify-content: center;
+            }
+
+            .box__icon {
+                margin-right: 30px;
+            }
+        }
+
+        @media screen and (min-width: 1024px) {
+            .container {
+                width: 1000px;
+                margin: auto;
+            }
+
+            .main-title {
+                font-size: 2.5em;
+            }
+
+            .menu {
+                font-size: 1em;
+            }
+
+            .banner {
+                min-height: 600px;
+            }
+
+            .banner:before {
+                min-height: 600px;
+            }
+
+            .banner__title,
+            .banner__txt {
+                font-size: 1.5em;
+                padding: 10px;
+            }
+
+            .main {
+                margin-top: 500px;
+            }
+
+            .design__item {
+                height: 400px;
+            }
+
+            .container-design .design__img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .container-design,
+            .container-tips {
+                display: flex;
+                flex-wrap: wrap;
+            }
+
+            .design__item {
+                width: 50%;
+            }
+
+            .container-box {
+                width: 50%;
+            }
+
+            .container-tips {
+                height: 500px;
+            }
+
+            .container-tips .design__item {
+                height: 100%;
+            }
+
+            .container-tips .design__img {
+                height: 100%;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .column--50-25 {
+                width: 24%;
+            }
+        }
+
+        @media screen and (min-width: 1280px) {
+            .container {
+                width: 1200px;
+            }
+
+            .design__title {
+                font-size: 2.5em;
+            }
+
+            .design__item {
+                height: 500px;
+            }
+        }
+
+        @media screen and (min-width: 1600px) {
+            .container {
+                width: 1400px;
+            }
+
+            .banner__title,
+            .banner__txt {
+                font-size: 2em;
+            }
+        }
+
+        .sign-in,
+        .join-now {
+            font-weight: 500;
+            text-decoration: none;
+            border: 1px solid black;
+            border-radius: 40px;
+            padding: 5px 20px 5px 20px;
+        }
+
+        .join-now {
+            margin-left: 12px;
+            background-color: black;
+            color: white;
+        }
+
+        .sign-in {
+            color: black;
+            background-color: white;
+        }
+
+        .join-now:hover {
+            background-color: transparent;
+            color: black;
+        }
+
+        .sign-in:hover {
+            background-color: transparent;
+            color: white;
+        }
+
+        .admin{
+            text-decoration: none;
+            color: transparent;
+        }
+    </style>
+
+    <script>
+        let btnMenu = document.getElementById('btn-menu');
+        let menu = document.getElementById('menu');
+        btnMenu.addEventListener('click', function () {
+            menu.classList.toggle('mostrar');
+        });
+    </script>
+</head>
+
+<body>
+
+    <body>
+        <header class="main-header">
+            <div class="container container--flex">
+                <h1 class="main-title"><span class="color-span">COMBI</span>TEC</h1>
+                <nav class="main-nav">
+                    <span class="icon-menu" id="btn-menu"><i class="fas fa-bars"></i></span>
+                    <ul class="menu" id="menu">
+                        <li class="menu__item"><a href="" class="menu__link menu__link--select"><span>Home</span></a>
+                        </li>
+                        <li class="menu__item"><a href="Service/" class="menu__link"><span>About</span></a></li>
+                        <li class="menu__item"><a href="Apis/" class="menu__link"><span>Apis
+
+                                </span></a></li>
+
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="banner">
+            <div class="banner__content">
+                <div class="container">
+                    <h2 class="banner__title">AREQUIPA</h2>
+                    <p class="banner__txt">SISTEMA DE APIS, FORMATO JSON</p>
+                </div>
+            </div>
+        </div>
+
+        <main class="main">
+            <section class="welcome">
+                <h2 class="section__title">WELCOME</h2>
+                <h1 class="welcome__txt">"No se puede tener un gran software sin un gran equipo, y la mayoría de los equipos de desarrollo se comportan como familias disfuncionales"</h1>
+            </section>
+        </main>
+        <footer class="main-footer">
+            <div class="container">
+                <div class="column column--50-25">
+                    <h2 class="footer__title">Connect <a class="admin" href="/admin">admin</a></h2>
+                    <div class="footer__socials">
+                        <div class="social-icon">
+                            <i class="fab fa-facebook-f"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-facebook" viewBox="0 0 16 16">
+                                    <path
+                                        d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z" />
+                                </svg></i>
+                            <a class="social__link" href="">Like us on Facebook</a>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-twitter"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-twitter" viewBox="0 0 16 16">
+                                    <path
+                                        d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z" />
+                                </svg></i>
+                            <a class="social__link" href="">Like us on Twiter</a>
+                        </div>
+
+                        <div class="social-icon">
+                            <i class="fab fa-dribbble"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-discord" viewBox="0 0 16 16">
+                                    <path
+                                        d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z" />
+                                </svg></i>
+                            <a class="social__link" href="https://discord.gg/YUufvt9r">Join a Discord</a>
+                        </div>
+                        <div class="social-icon">
+                            <i class="fab fa-pinterest"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-github" viewBox="0 0 16 16">
+                                    <path
+                                        d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.012 8.012 0 0 0 16 8c0-4.42-3.58-8-8-8z" />
+                                </svg></i>
+                            <a class="social__link" href="">Github</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="column column--50-25">
+                    <h2 class="footer__title">Contact</h2>
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p class="contact__txt">bruno.huarca@tecsup.edu.pe</p>
+                    </div>
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                        <p class="contact__txt">ruben.quea@tecsup.edu.pe</p>
+                    </div>
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                        <p class="contact__txt">bladimir.chipana@tecsup.edu.pe</p>
+                    </div>
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p class="contact__txt">kelvin.rojas@tecsup.edu.pe</p>
+                    </div>
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p class="contact__txt">enzo.velarde@tecsup.edu.pe</p>
+                    </div>
+                    <div class="contact-icon">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <p class="contact__txt">jorge.flores.m@tecsup.edu.pe</p>
+                    </div>
+
+                </div>
+            </div>
+        </footer>
+
+    </body>
+
+</html>

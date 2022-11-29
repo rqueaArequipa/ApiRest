@@ -1,6 +1,7 @@
 from django.db import models
 
-# Create your models here.
+# Create your models here
+
 
 class Users(models.Model):
     name = models.CharField(max_length=30, null=True)
@@ -91,6 +92,14 @@ class Unidades(models.Model):
    
     def __str__(self):
         return self.placa
+
+
+class Comentarios(models.Model):
+    comentario = models.TextField()
+    usuario_id = models.ForeignKey(Usuarios ,null=True, blank=True, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return self.comentario
 
 ''''class Rutas2(models.Model):
     nombre = models.CharField(max_length=200)
